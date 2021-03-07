@@ -12,7 +12,8 @@ public class Procraft {
 
     static ArrayList<String> goodName = new ArrayList<String>();
     static ArrayList<String> badName = new ArrayList<String>();
-    @Test
+
+    @Test(priority = 0)
     public static void main() {
         openPage();
         navMenu();
@@ -55,8 +56,9 @@ public class Procraft {
             }
         });
     }
-@Test
-    static public void testPriceInCardProduct(){
+
+    @Test(priority = 2)
+    static public void testPriceInCardProduct() {
         changePage(1);
         try {
             Thread.sleep(2000);
@@ -66,26 +68,27 @@ public class Procraft {
         WebElement element = Main.driver.findElement(By.xpath("//img[@alt='PROCRAFT']/../../../div[@class='ut2-gl__name']/a"));
         element.click();
         WebElement price = Main.driver.findElement(By.xpath("//span[@class='ty-price']/bdi/span"));
-        Assert.assertNotEquals(price.getAttribute("innerText"),"");
+        Assert.assertNotEquals(price.getAttribute("innerText"), "");
     }
 
     static void changePage(int page) {
         Main.driver.findElement(By.cssSelector(".ty-pagination__items > a:nth-child(" + page + ")")).click();
     }
-    @AfterTest
-    static void goodAndBadNamesProcraft(){
+
+    @Test(priority = 1)
+    static void goodAndBadNamesProcraft() {
         System.out.println("goodName");
         Object[] goodNameArray = goodName.toArray();
         for (Object goodName : goodNameArray) {
             System.out.println(goodName);
         }
-        if(!badName.isEmpty())
-        System.out.println("badName");
+        if (!badName.isEmpty())
+            System.out.println("badName");
         Object[] badNameArray = badName.toArray();
         for (Object badName : badNameArray) {
             System.out.println(badName);
         }
-        String msg= "Have bad names: " +badName.size();
-        Assert.assertEquals(badName.isEmpty(),true,msg );
+        String msg = "Have bad names: " + badName.size();
+        Assert.assertEquals(badName.isEmpty(), true, msg);
     }
 }

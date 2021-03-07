@@ -11,6 +11,7 @@
         <classes>
             <class name="BasketTest"></class>
         </classes>
+
     </test>
     <test verbose="2" preserve-order="true" name="3">
         <classes>
