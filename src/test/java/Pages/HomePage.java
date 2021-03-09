@@ -119,8 +119,6 @@ public class HomePage {
             Assert.fail("This Product don't have discount label " + productName.getText());
         }
 
-
-
         Double doubleProductOldPrice = Double.valueOf(productOldPrice.getText().replaceAll("[^\\d\\.]", ""));
         Double doubleProductDiscount = Double.valueOf(productDiscount.getText().replaceAll("[^\\d\\.]", ""));
         Double doubleProductNewPrice = Double.valueOf(productNewPrice.getText().replaceAll("[^\\d\\.]", ""));
