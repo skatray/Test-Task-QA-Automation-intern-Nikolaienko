@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="1">
-        <parameter name="COUNTPRODUCT" value="3"></parameter>
-        <classes>
-            <class name="Discounts"></class>
-        </classes>
-    </test>
+
     <test verbose="2" preserve-order="true" name="2">
         <classes>
             <class name="BasketTest"></class>
         </classes>
-
     </test>
     <test verbose="2" preserve-order="true" name="3">
         <classes>
@@ -21,6 +15,12 @@
     <test verbose="2" preserve-order="true" name="4">
         <classes>
             <class name="PriceCalculationTest"></class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="1">
+        <parameter name="COUNTPRODUCT" value="3"></parameter>
+        <classes>
+            <class name="Discounts"></class>
         </classes>
     </test>
 </suite>

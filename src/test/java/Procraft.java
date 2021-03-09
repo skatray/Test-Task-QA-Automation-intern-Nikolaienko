@@ -1,78 +1,65 @@
+import Pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 
-
-public class Procraft {
-
+public class Procraft extends WebDriverSettings {
 
     static ArrayList<String> goodName = new ArrayList<String>();
     static ArrayList<String> badName = new ArrayList<String>();
 
     @Test(priority = 0)
-    public static void main() {
-        openPage();
-        navMenu();
+    public void Procraft() {
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        homePage.openPage();
+        homePage.openPageInstrumenty();
+        homePage.openPagePerforatory();
         searchElements(false);
-        changePage(2);
+        homePage.changePage(2);
         searchElements(false);
-        changePage(1);
+        homePage.changePage(1);
         searchElements(true);
-        changePage(3);
+        homePage.changePage(3);
         searchElements(true);
-        changePage(5);
+        homePage.changePage(5);
         searchElements(true);
 
     }
-
-    static void openPage() {
-        Main.driver.get("https://shoptool.com.ua/");
-    }
-
-    static void navMenu() {
-        Main.driver.findElement(By.xpath("//bdi[text()='Электроинструмент']/../../..")).click();
-        Main.driver.findElement(By.xpath("//a[text()='Перфораторы']")).click();
-    }
-
-    static void searchElements(boolean check) {
+     void searchElements(boolean check) {
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Main.driver.findElements(By.xpath("//img[@alt='PROCRAFT']/../../../div[@class='ut2-gl__name']/a")).forEach(webElement -> {
+        driver.findElements(By.xpath("//img[@alt='PROCRAFT']/../../../div[@class='ut2-gl__name']/a")).forEach(webElement -> {
             if (check) {
-                if (webElement.getAttribute("innerText").toLowerCase().contains("procraft")) {
-                    goodName.add(webElement.getAttribute("innerText"));
+                if (webElement.getText().toLowerCase().contains("procraft")) {
+                    goodName.add(webElement.getText());
                 } else {
-                    badName.add(webElement.getAttribute("innerText"));
+                    badName.add(webElement.getText());
                 }
             } else {
-                System.out.println(webElement.getAttribute("innerText"));
+                System.out.println(webElement.getText());
             }
         });
     }
 
     @Test(priority = 2)
-    static public void testPriceInCardProduct() {
-        changePage(1);
+     public void testPriceInCardProduct() {
+         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+         homePage.changePage(1);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        WebElement element = Main.driver.findElement(By.xpath("//img[@alt='PROCRAFT']/../../../div[@class='ut2-gl__name']/a"));
+        WebElement element = driver.findElement(By.xpath("//img[@alt='PROCRAFT']/../../../div[@class='ut2-gl__name']/a"));
         element.click();
-        WebElement price = Main.driver.findElement(By.xpath("//span[@class='ty-price']/bdi/span"));
+        WebElement price = driver.findElement(By.xpath("//span[@class='ty-price']/bdi/span"));
         Assert.assertNotEquals(price.getAttribute("innerText"), "");
-    }
-
-    static void changePage(int page) {
-        Main.driver.findElement(By.cssSelector(".ty-pagination__items > a:nth-child(" + page + ")")).click();
     }
 
     @Test(priority = 1)
